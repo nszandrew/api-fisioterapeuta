@@ -44,4 +44,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ExceptionResponse exceptionResponse =  new ExceptionResponse(new Date(), HttpStatus.BAD_REQUEST, ex.getMessage(), "File Download Error");
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(NeurologicalTreatmentNotFoundException.class)
+    public final ResponseEntity<ExceptionResponse> handleNeurologicalTreatmentNotFoundExceptions(Exception ex){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), HttpStatus.NOT_FOUND, ex.getMessage(), "Neurological treatment not found!");
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
 }

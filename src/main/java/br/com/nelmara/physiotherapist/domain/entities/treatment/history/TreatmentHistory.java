@@ -2,6 +2,10 @@ package br.com.nelmara.physiotherapist.domain.entities.treatment.history;
 
 import br.com.nelmara.physiotherapist.domain.entities.patient.Patient;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.Treatment;
+import br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.CorporalTreatment;
+import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.FacialTreatment;
+import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.NeurologicaTreatment;
+import br.com.nelmara.physiotherapist.domain.entities.treatment.types.ozonio.OzonioTreatment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +38,19 @@ public class TreatmentHistory implements Serializable {
     @JoinColumn(name = "treatment_id")
     private Treatment treatment;
 
+    @ManyToOne
+    @JoinColumn(name = "corporal_id")
+    private CorporalTreatment corporal;
 
+    @ManyToOne
+    @JoinColumn(name = "facial_id")
+    private FacialTreatment facial;
 
+    @ManyToOne
+    @JoinColumn(name = "neurological_id")
+    private NeurologicaTreatment neurological;
+
+    @ManyToOne
+    @JoinColumn(name = "ozonio_id")
+    private OzonioTreatment ozonio;
 }

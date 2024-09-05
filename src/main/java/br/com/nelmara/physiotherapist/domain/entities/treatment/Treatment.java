@@ -2,10 +2,6 @@ package br.com.nelmara.physiotherapist.domain.entities.treatment;
 
 import br.com.nelmara.physiotherapist.domain.entities.treatment.dto.UpdateTreatmentDTO;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.history.TreatmentHistory;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.CorporalTreatment;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.FacialTreatment;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.NeurologicaTreatment;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.ozonio.OzonioTreatment;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,17 +35,6 @@ public class Treatment implements Serializable {
     @OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL)
     private List<TreatmentHistory> treatmentHistories;
 
-    @OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL)
-    private List<CorporalTreatment> corporalTreatment;
-
-    @OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL)
-    private List<FacialTreatment> facialTreatment;
-
-    @OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL)
-    private List<NeurologicaTreatment> neurologicaTreatment;
-
-    @OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL)
-    private List<OzonioTreatment> ozonioTreatment;
 
     public void updateTreatement(UpdateTreatmentDTO data){
         if(data.diagnosticHypothesis() != null){this.diagnosticHypothesis = data.diagnosticHypothesis();}

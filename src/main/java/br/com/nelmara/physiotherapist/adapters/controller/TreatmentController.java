@@ -19,10 +19,10 @@ public class TreatmentController {
         this.service = service;
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/{id}/{tratamento}")
     @Transactional
-    public ResponseEntity<TreatmentDTO> addTreatment(@RequestBody @Valid TreatmentDTO data, @PathVariable Long id) {
-        var treatment = service.addTreatment(data, id);
+    public ResponseEntity<TreatmentDTO> addTreatment(@RequestBody @Valid TreatmentDTO data, @PathVariable Long id, @PathVariable Long tratamento) {
+        var treatment = service.addTreatment(data, id, tratamento);
         return ResponseEntity.status(HttpStatus.CREATED).body(treatment);
     }
 

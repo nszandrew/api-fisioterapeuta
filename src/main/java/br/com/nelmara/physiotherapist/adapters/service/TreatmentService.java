@@ -5,7 +5,7 @@ import br.com.nelmara.physiotherapist.domain.entities.treatment.dto.UpdateTreatm
 
 public interface TreatmentService {
 
-    TreatmentDTO addTreatment(TreatmentDTO data, Long id);
+    TreatmentDTO addTreatment(TreatmentDTO data, Long id, Long tratamento);
     UpdateTreatmentDTO updateTreatment(UpdateTreatmentDTO data, Long id);
 
 }
