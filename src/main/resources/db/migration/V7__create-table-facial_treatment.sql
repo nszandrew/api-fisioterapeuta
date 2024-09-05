@@ -53,7 +53,5 @@ CREATE TABLE IF NOT EXISTS tb_facial_treatment (
     mancha VARCHAR(255), -- Mancha:
     expectativas_tratamento VARCHAR(255), -- 34- O que você espera do tratamento?
     observacoes_relevantes VARCHAR(255), -- Observações relevantes:
-    fotos_antes_depois VARCHAR(255), -- Anexas fotos antes e depois:
-    treatment_id INT,
-    FOREIGN KEY (treatment_id) REFERENCES tb_treatment(id)
+    fotos_antes_depois VARCHAR(255) -- Anexas fotos antes e depois:
 );

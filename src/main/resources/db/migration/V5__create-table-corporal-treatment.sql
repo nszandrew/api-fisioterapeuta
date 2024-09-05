@@ -59,8 +59,6 @@ CREATE TABLE IF NOT EXISTS tb_corporal_treatment (
     hernia_disco BOOLEAN,
     pedras_rins BOOLEAN,
     patologia_ativa BOOLEAN,
-    trombose BOOLEAN,
-    treatment_id INT,
-    FOREIGN KEY (treatment_id) REFERENCES tb_treatment(id)
+    trombose BOOLEAN
     );
 

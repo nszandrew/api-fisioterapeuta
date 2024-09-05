@@ -6,7 +6,5 @@ CREATE TABLE IF NOT EXISTS tb_neurological_treatment (
     forca_muscular VARCHAR(100),
     marcha VARCHAR(100),
     trocas_posturais VARCHAR(100),
-    orientacoes VARCHAR(100),
-    treatment_id INT,
-    FOREIGN KEY (treatment_id) REFERENCES tb_treatment(id)
+    orientacoes VARCHAR(100)
 );

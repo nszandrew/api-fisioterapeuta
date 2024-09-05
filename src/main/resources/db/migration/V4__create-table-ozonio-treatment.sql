@@ -1,6 +1,5 @@
 CREATE TABLE IF NOT EXISTS tb_ozonio_treatment (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    treatment_id INT,
     ingestao_agua TEXT,
     eliminacoes_fisiologicas TEXT,
     sono_repouso TEXT,
@@ -52,6 +51,5 @@ CREATE TABLE IF NOT EXISTS tb_ozonio_treatment (
     ernia_de_disco BOOLEAN,
     pedras_nos_rins BOOLEAN,
     patologia_ativa TEXT,
-    trombose BOOLEAN,
-    FOREIGN KEY (treatment_id) REFERENCES tb_treatment(id)
+    trombose BOOLEAN
     );
