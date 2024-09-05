@@ -1,0 +1,27 @@
+package br.com.nelmara.physiotherapist.adapters.controller;
+
+import br.com.nelmara.physiotherapist.adapters.service.CorporalService;
+import br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.dto.CorporalTreatmentDTO;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/corporal")
+public class CorporalController {
+
+    private final CorporalService service;
+
+
+    public CorporalController(CorporalService service) {
+        this.service = service;
+    }
+
+    @PostMapping("/{id}")
+    @Transactional
+    public ResponseEntity<CorporalTreatmentDTO> addCorporalTreatment(@RequestBody @Valid CorporalTreatmentDTO data, @PathVariable Long id) {
+        service.addCorporal(data, id);
+        return ResponseEntity.ok().body(data);
+    }
+}

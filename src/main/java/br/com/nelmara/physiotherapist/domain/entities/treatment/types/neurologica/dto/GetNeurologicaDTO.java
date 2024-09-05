@@ -1,4 +1,4 @@
-package br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica;
+package br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.dto;
 
 import java.io.Serializable;
 import java.util.Objects;

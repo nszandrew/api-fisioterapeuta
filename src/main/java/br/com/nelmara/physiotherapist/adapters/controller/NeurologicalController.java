@@ -1,7 +1,7 @@
 package br.com.nelmara.physiotherapist.adapters.controller;
 
 import br.com.nelmara.physiotherapist.adapters.service.NeurologicalService;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.NeurologicalDTO;
+import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.dto.NeurologicalDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

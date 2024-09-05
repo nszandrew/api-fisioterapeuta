@@ -1,8 +1,7 @@
-package br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial;
+package br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.Fototipo;
+import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.TipoPele;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

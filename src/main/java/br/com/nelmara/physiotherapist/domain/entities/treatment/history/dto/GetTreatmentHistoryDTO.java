@@ -1,9 +1,9 @@
 package br.com.nelmara.physiotherapist.domain.entities.treatment.history.dto;
 
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.GetCorporalTreatmentDTO;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.GetFacialTreatmentDTO;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.GetNeurologicaDTO;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.ozonio.GetOzonioTreatmentDTO;
+import br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.dto.GetCorporalTreatmentDTO;
+import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.dto.GetFacialTreatmentDTO;
+import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.dto.GetNeurologicaDTO;
+import br.com.nelmara.physiotherapist.domain.entities.treatment.types.ozonio.dto.GetOzonioTreatmentDTO;
 
 import java.util.Date;
 import java.util.Objects;
