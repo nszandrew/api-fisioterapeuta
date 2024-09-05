@@ -9,7 +9,6 @@ import br.com.nelmara.physiotherapist.domain.entities.patient.dto.PatientDTO;
 import br.com.nelmara.physiotherapist.domain.entities.patient.dto.UpdatePatientDTO;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.history.dto.GetTreatmentHistoryDTO;
 import br.com.nelmara.physiotherapist.framework.exceptions.custom.PatientNotFoundException;
-import org.hibernate.Hibernate;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.slf4j.Logger;
@@ -80,7 +79,7 @@ public Page<GetPatientDTO> findAll(Pageable pageable) {
 
 
 
-
+//Não está funcionando - retorna erro de persistentBag, precisa converter para uma arraylist como em cima
     @Override
     public List<GetPatientDTO> findByFirstName(String firstName, String lastName) {
         logger.info("Finding patient by Full Name {} {}", firstName, lastName);

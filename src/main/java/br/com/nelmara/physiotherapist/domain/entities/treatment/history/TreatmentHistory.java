@@ -1,7 +1,6 @@
 package br.com.nelmara.physiotherapist.domain.entities.treatment.history;
 
 import br.com.nelmara.physiotherapist.domain.entities.patient.Patient;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.Treatment;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.CorporalTreatment;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.FacialTreatment;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.NeurologicaTreatment;
@@ -34,9 +33,6 @@ public class TreatmentHistory implements Serializable {
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
-    @ManyToOne
-    @JoinColumn(name = "treatment_id")
-    private Treatment treatment;
 
     @ManyToOne
     @JoinColumn(name = "corporal_id")

@@ -1,7 +1,6 @@
 package br.com.nelmara.physiotherapist.framework.utils;
 
 import br.com.nelmara.physiotherapist.domain.entities.patient.Patient;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.Treatment;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.history.TreatmentHistory;
 import br.com.nelmara.physiotherapist.adapters.repositories.TreatmentHistoryRepository;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.NeurologicaTreatment;
@@ -18,12 +17,12 @@ public class TreatmentHistoryMethods {
         this.repository = repository;
     }
 
-    public void groupTreatmentToPatient(Patient patient, Treatment treatment, NeurologicaTreatment tratamento) {
+    public void groupTreatmentToPatient(Patient patient, NeurologicaTreatment neurologicaTreatment) {
         TreatmentHistory treatmentHistory = new TreatmentHistory();
         treatmentHistory.setPatient(patient);
-        treatmentHistory.setTreatment(treatment);
+        treatmentHistory.setNeurological(neurologicaTreatment);
         treatmentHistory.setTreatmentDate(new Date());
-        treatmentHistory.setNeurological(tratamento);
+
         repository.save(treatmentHistory);
     }
 }

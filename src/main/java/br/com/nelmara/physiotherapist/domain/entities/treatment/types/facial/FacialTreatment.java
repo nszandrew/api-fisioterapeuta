@@ -1,6 +1,5 @@
 package br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial;
 
-import br.com.nelmara.physiotherapist.domain.entities.treatment.Treatment;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.history.TreatmentHistory;
 import jakarta.persistence.*;
 import lombok.*;
