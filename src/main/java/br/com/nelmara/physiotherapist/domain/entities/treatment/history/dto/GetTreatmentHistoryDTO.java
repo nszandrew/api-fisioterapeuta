@@ -5,10 +5,13 @@ import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.dto
 import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.dto.GetNeurologicaDTO;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.types.ozonio.dto.GetOzonioTreatmentDTO;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class GetTreatmentHistoryDTO {
+public class GetTreatmentHistoryDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private Date treatmentDate;

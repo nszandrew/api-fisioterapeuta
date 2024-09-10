@@ -2,10 +2,10 @@ package br.com.nelmara.physiotherapist.usecases;
 
 import br.com.nelmara.physiotherapist.adapters.repositories.FacialRepository;
 import br.com.nelmara.physiotherapist.adapters.repositories.PatientRepository;
+import br.com.nelmara.physiotherapist.adapters.service.CacheService;
 import br.com.nelmara.physiotherapist.adapters.service.FacialService;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.FacialTreatment;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.dto.FacialTreatmentDTO;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.NeurologicaTreatment;
 import br.com.nelmara.physiotherapist.framework.exceptions.custom.PatientNotFoundException;
 import br.com.nelmara.physiotherapist.framework.utils.TreatmentHistoryMethods;
 import org.slf4j.Logger;
@@ -18,12 +18,14 @@ public class FacialServiceImpl implements FacialService {
 
     private final FacialRepository repository;
     private final PatientRepository patientRepository;
+    private final CacheService cacheService;
     private final TreatmentHistoryMethods treatmentHistoryMethods;
     private final Logger logger = LoggerFactory.getLogger(FacialServiceImpl.class);
 
-    public FacialServiceImpl(FacialRepository repository, PatientRepository patientRepository, TreatmentHistoryMethods treatmentHistoryMethods) {
+    public FacialServiceImpl(FacialRepository repository, PatientRepository patientRepository, CacheService cacheService, TreatmentHistoryMethods treatmentHistoryMethods) {
         this.repository = repository;
         this.patientRepository = patientRepository;
+        this.cacheService = cacheService;
         this.treatmentHistoryMethods = treatmentHistoryMethods;
     }
 
@@ -40,6 +42,7 @@ public class FacialServiceImpl implements FacialService {
         var treatment = repository.findById(newTreatment.getId()).get();
 
         treatmentHistoryMethods.groupTreatmentToPatientFacial(patient, treatment);
+        cacheService.evictAllCacheValues("Patient");
 
         return data;
     }

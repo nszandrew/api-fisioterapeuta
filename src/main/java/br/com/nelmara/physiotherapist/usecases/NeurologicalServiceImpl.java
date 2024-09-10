@@ -2,6 +2,7 @@ package br.com.nelmara.physiotherapist.usecases;
 
 import br.com.nelmara.physiotherapist.adapters.repositories.NeurologicalRepository;
 import br.com.nelmara.physiotherapist.adapters.repositories.PatientRepository;
+import br.com.nelmara.physiotherapist.adapters.service.CacheService;
 import br.com.nelmara.physiotherapist.adapters.service.NeurologicalService;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.NeurologicaTreatment;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.dto.NeurologicalDTO;
@@ -17,12 +18,14 @@ public class NeurologicalServiceImpl implements NeurologicalService {
 
     private final NeurologicalRepository repository;
     private final PatientRepository patientRepository;
+    private final CacheService cacheService;
     private final TreatmentHistoryMethods treatmentHistoryMethods;
     private final Logger logger = LoggerFactory.getLogger(NeurologicalServiceImpl.class);
 
-    public NeurologicalServiceImpl(NeurologicalRepository repository, PatientRepository patientRepository, TreatmentHistoryMethods treatmentHistoryMethods) {
+    public NeurologicalServiceImpl(NeurologicalRepository repository, PatientRepository patientRepository, CacheService cacheService, TreatmentHistoryMethods treatmentHistoryMethods) {
         this.repository = repository;
         this.patientRepository = patientRepository;
+        this.cacheService = cacheService;
         this.treatmentHistoryMethods = treatmentHistoryMethods;
     }
 
@@ -39,6 +42,7 @@ public class NeurologicalServiceImpl implements NeurologicalService {
         var treatment = repository.findById(newTreatment.getId()).get();
 
         treatmentHistoryMethods.groupTreatmentToPatientNeurological(patient, treatment);
+        cacheService.evictAllCacheValues("Patient");
 
         return data;
     }

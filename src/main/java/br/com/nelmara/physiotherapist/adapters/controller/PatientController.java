@@ -6,6 +6,7 @@ import br.com.nelmara.physiotherapist.domain.entities.patient.dto.PatientDTO;
 import br.com.nelmara.physiotherapist.domain.entities.patient.dto.UpdatePatientDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

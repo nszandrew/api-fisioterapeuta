@@ -2,6 +2,7 @@ package br.com.nelmara.physiotherapist.usecases;
 
 import br.com.nelmara.physiotherapist.adapters.repositories.OzonioRepository;
 import br.com.nelmara.physiotherapist.adapters.repositories.PatientRepository;
+import br.com.nelmara.physiotherapist.adapters.service.CacheService;
 import br.com.nelmara.physiotherapist.adapters.service.OzonioService;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.FacialTreatment;
 import br.com.nelmara.physiotherapist.domain.entities.treatment.types.ozonio.OzonioTreatment;
@@ -20,12 +21,14 @@ public class OzonioServiceImpl implements OzonioService {
     private final OzonioRepository repository;
     private final PatientRepository patientRepository;
     private final TreatmentHistoryMethods treatmentHistoryMethods;
+    private final CacheService cacheService;
     private final Logger logger = LoggerFactory.getLogger(FacialServiceImpl.class);
 
-    public OzonioServiceImpl(OzonioRepository repository, PatientRepository patientRepository, TreatmentHistoryMethods treatmentHistoryMethods) {
+    public OzonioServiceImpl(OzonioRepository repository, PatientRepository patientRepository, TreatmentHistoryMethods treatmentHistoryMethods, CacheService cacheService) {
         this.repository = repository;
         this.patientRepository = patientRepository;
         this.treatmentHistoryMethods = treatmentHistoryMethods;
+        this.cacheService = cacheService;
     }
 
 
@@ -41,6 +44,7 @@ public class OzonioServiceImpl implements OzonioService {
         var treatment = repository.findById(newTreatment.getId()).get();
 
         treatmentHistoryMethods.groupTreatmentToPatientOzonio(patient, treatment);
+        cacheService.evictAllCacheValues("Patient");
 
         return data;
     }

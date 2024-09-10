@@ -5,11 +5,12 @@ import br.com.nelmara.physiotherapist.domain.entities.patient.dto.GetPatientDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MapperModel {
+public class MapperModel implements Serializable {
 
     private static ModelMapper mapper = new ModelMapper();
 
