@@ -4,10 +4,11 @@ import br.com.nelmara.physiotherapist.adapters.repositories.CorporalRepository;
 import br.com.nelmara.physiotherapist.adapters.repositories.PatientRepository;
 import br.com.nelmara.physiotherapist.adapters.service.CacheService;
 import br.com.nelmara.physiotherapist.adapters.service.CorporalService;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.CorporalTreatment;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.dto.CorporalTreatmentDTO;
-import br.com.nelmara.physiotherapist.framework.exceptions.custom.PatientNotFoundException;
-import br.com.nelmara.physiotherapist.framework.utils.TreatmentHistoryMethods;
+import br.com.nelmara.physiotherapist.domain.treatment.types.corporal.CorporalTreatment;
+import br.com.nelmara.physiotherapist.domain.treatment.types.corporal.dto.CorporalTreatmentDTO;
+import br.com.nelmara.physiotherapist.exceptions.custom.PatientNotFoundException;
+import br.com.nelmara.physiotherapist.exceptions.custom.TreatmentNotFoundException;
+import br.com.nelmara.physiotherapist.usecases.utils.TreatmentHistoryMethods;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -33,7 +34,6 @@ public class CorporalServiceImpl implements CorporalService {
     public CorporalTreatmentDTO addCorporal(CorporalTreatmentDTO data, Long id) {
         logger.info("Adding corporal treatment in a patient");
         var patient = patientRepository.findById(id).orElseThrow(() -> new PatientNotFoundException("Patient not found"));
-
         CorporalTreatment newTreatment = new CorporalTreatment();
         BeanUtils.copyProperties(data, newTreatment);
         repository.save(newTreatment);
@@ -45,4 +45,22 @@ public class CorporalServiceImpl implements CorporalService {
 
         return data;
     }
+
+    @Override
+    public CorporalTreatmentDTO updateCorporal(CorporalTreatmentDTO data, Long id) {
+        logger.info("Updating corporal treatment in a patient");
+        var treatment = repository.findById(id).orElseThrow(() -> new TreatmentNotFoundException("Treatment not found"));
+        treatment.updateTreatment(data);
+        repository.save(treatment);
+        cacheService.evictAllCacheValues("Patient");
+        return data;
+    }
+
+    @Override
+    public void delete(Long id) {
+        logger.info("deleting a corporal treatment, by id: {}", id);
+        if (!(repository.existsById(id))) {throw new TreatmentNotFoundException("Treatment not found, nothing was deleted");}
+        repository.deleteById(id);
+    }
+
 }

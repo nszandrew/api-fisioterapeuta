@@ -1,7 +1,7 @@
 package br.com.nelmara.physiotherapist.adapters.controller;
 
 import br.com.nelmara.physiotherapist.adapters.service.FacialService;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.dto.FacialTreatmentDTO;
+import br.com.nelmara.physiotherapist.domain.treatment.types.facial.dto.FacialTreatmentDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +23,18 @@ public class FacialController {
     public ResponseEntity<FacialTreatmentDTO> addFacialTreatment(@RequestBody @Valid FacialTreatmentDTO data, @PathVariable Long id) {
         service.addFacialTreatment(data, id);
         return ResponseEntity.ok().body(data);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<FacialTreatmentDTO> updateFacialTreatment(@RequestBody @Valid FacialTreatmentDTO data, @PathVariable Long id) {
+        service.updateFacialTreatment(data, id);
+        return ResponseEntity.ok().body(data);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteFacialTreatment(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

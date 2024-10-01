@@ -1,4 +1,4 @@
-package br.com.nelmara.physiotherapist.framework.exceptions.custom;
+package br.com.nelmara.physiotherapist.exceptions.custom;
 
 public class TreatmentNotFoundException extends RuntimeException {
 

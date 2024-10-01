@@ -1,4 +1,4 @@
-package br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.dto;
+package br.com.nelmara.physiotherapist.domain.treatment.types.corporal.dto;
 
 import java.math.BigDecimal;
 

@@ -1,7 +1,7 @@
-package br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.dto;
+package br.com.nelmara.physiotherapist.domain.treatment.types.facial.dto;
 
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.Fototipo;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.TipoPele;
+import br.com.nelmara.physiotherapist.domain.treatment.types.facial.Fototipo;
+import br.com.nelmara.physiotherapist.domain.treatment.types.facial.TipoPele;
 
 import java.math.BigDecimal;
 import java.util.Date;

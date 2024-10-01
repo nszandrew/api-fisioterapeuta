@@ -1,4 +1,4 @@
-package br.com.nelmara.physiotherapist.framework.exceptions;
+package br.com.nelmara.physiotherapist.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

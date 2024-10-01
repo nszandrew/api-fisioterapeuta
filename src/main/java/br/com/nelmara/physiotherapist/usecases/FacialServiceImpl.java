@@ -4,10 +4,11 @@ import br.com.nelmara.physiotherapist.adapters.repositories.FacialRepository;
 import br.com.nelmara.physiotherapist.adapters.repositories.PatientRepository;
 import br.com.nelmara.physiotherapist.adapters.service.CacheService;
 import br.com.nelmara.physiotherapist.adapters.service.FacialService;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.FacialTreatment;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.dto.FacialTreatmentDTO;
-import br.com.nelmara.physiotherapist.framework.exceptions.custom.PatientNotFoundException;
-import br.com.nelmara.physiotherapist.framework.utils.TreatmentHistoryMethods;
+import br.com.nelmara.physiotherapist.domain.treatment.types.facial.FacialTreatment;
+import br.com.nelmara.physiotherapist.domain.treatment.types.facial.dto.FacialTreatmentDTO;
+import br.com.nelmara.physiotherapist.exceptions.custom.PatientNotFoundException;
+import br.com.nelmara.physiotherapist.exceptions.custom.TreatmentNotFoundException;
+import br.com.nelmara.physiotherapist.usecases.utils.TreatmentHistoryMethods;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -45,5 +46,22 @@ public class FacialServiceImpl implements FacialService {
         cacheService.evictAllCacheValues("Patient");
 
         return data;
+    }
+
+    @Override
+    public FacialTreatmentDTO updateFacialTreatment(FacialTreatmentDTO data, Long id) {
+        logger.info("Updating facial treatment in a patient");
+        var treatment = repository.findById(id).orElseThrow(() -> new TreatmentNotFoundException("Treatment not found"));
+        treatment.updateTreatment(data);
+        repository.save(treatment);
+        cacheService.evictAllCacheValues("Patient");
+        return data;
+    }
+
+    @Override
+    public void delete(Long id) {
+        logger.info("deleting a facial treatment, by id: {}", id);
+        if (!(repository.existsById(id))) {throw new TreatmentNotFoundException("Treatment not found, nothing was deleted");}
+        repository.deleteById(id);
     }
 }

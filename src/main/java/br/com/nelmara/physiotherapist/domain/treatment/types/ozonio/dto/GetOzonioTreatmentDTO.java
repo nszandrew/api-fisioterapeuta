@@ -1,4 +1,4 @@
-package br.com.nelmara.physiotherapist.domain.entities.treatment.types.ozonio.dto;
+package br.com.nelmara.physiotherapist.domain.treatment.types.ozonio.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

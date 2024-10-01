@@ -1,7 +1,7 @@
 package br.com.nelmara.physiotherapist.adapters.controller;
 
 import br.com.nelmara.physiotherapist.adapters.service.CorporalService;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.dto.CorporalTreatmentDTO;
+import br.com.nelmara.physiotherapist.domain.treatment.types.corporal.dto.CorporalTreatmentDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +23,18 @@ public class CorporalController {
     public ResponseEntity<CorporalTreatmentDTO> addCorporalTreatment(@RequestBody @Valid CorporalTreatmentDTO data, @PathVariable Long id) {
         service.addCorporal(data, id);
         return ResponseEntity.ok().body(data);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<CorporalTreatmentDTO> updateCorporalTreatment(@RequestBody @Valid CorporalTreatmentDTO data, @PathVariable Long id) {
+        service.updateCorporal(data, id);
+        return ResponseEntity.ok().body(data);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteCorporalTreatment(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
