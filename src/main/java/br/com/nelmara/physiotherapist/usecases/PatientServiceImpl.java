@@ -4,12 +4,13 @@ import br.com.nelmara.physiotherapist.adapters.repositories.PatientRepository;
 import br.com.nelmara.physiotherapist.adapters.service.CacheService;
 import br.com.nelmara.physiotherapist.adapters.service.MapperModel;
 import br.com.nelmara.physiotherapist.adapters.service.PatientService;
-import br.com.nelmara.physiotherapist.domain.entities.patient.Patient;
-import br.com.nelmara.physiotherapist.domain.entities.patient.dto.GetPatientDTO;
-import br.com.nelmara.physiotherapist.domain.entities.patient.dto.PatientDTO;
-import br.com.nelmara.physiotherapist.domain.entities.patient.dto.UpdatePatientDTO;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.history.dto.GetTreatmentHistoryDTO;
-import br.com.nelmara.physiotherapist.framework.exceptions.custom.PatientNotFoundException;
+import br.com.nelmara.physiotherapist.domain.patient.Patient;
+import br.com.nelmara.physiotherapist.domain.patient.dto.GetPatientDTO;
+import br.com.nelmara.physiotherapist.domain.patient.dto.PatientDTO;
+import br.com.nelmara.physiotherapist.domain.patient.dto.UpdatePatientDTO;
+import br.com.nelmara.physiotherapist.domain.treatment.history.dto.GetTreatmentHistoryDTO;
+import br.com.nelmara.physiotherapist.exceptions.custom.PatientNotFoundException;
+import br.com.nelmara.physiotherapist.exceptions.custom.TreatmentNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.slf4j.Logger;
@@ -47,34 +48,34 @@ public class PatientServiceImpl implements PatientService {
         logger.info("Cache empty");
     }
 
-@Override
-@Cacheable("Patient")
-public Page<GetPatientDTO> findAll(Pageable pageable) {
-    logger.info("Finding all patients with treatment histories and apply in memory");
+    @Override
+    @Cacheable("Patient")
+    public Page<GetPatientDTO> findAll(Pageable pageable) {
+        logger.info("Finding all patients with treatment histories and apply in memory");
 
-    List<Patient> patients = repository.findAllWithTreatments(pageable);
+        List<Patient> patients = repository.findAllWithTreatments(pageable);
 
-    ModelMapper modelMapper = new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
 
-    TypeMap<Patient, GetPatientDTO> typeMap = modelMapper.createTypeMap(Patient.class, GetPatientDTO.class);
-    typeMap.addMappings(mapper -> {
-        mapper.<List<GetTreatmentHistoryDTO>>map(src -> {
-            if (src.getTreatmentHistories() == null) {
-                return new ArrayList<>(); // Se estiver null, retorna uma lista vazia
-            } else {
-                return new ArrayList<>(src.getTreatmentHistories()); // Converte PersistentBag em ArrayList
-            }
-        }, GetPatientDTO::setTreatmentHistories);
-    });
+        TypeMap<Patient, GetPatientDTO> typeMap = modelMapper.createTypeMap(Patient.class, GetPatientDTO.class);
+        typeMap.addMappings(mapper -> {
+            mapper.<List<GetTreatmentHistoryDTO>>map(src -> {
+                if (src.getTreatmentHistories() == null) {
+                    return new ArrayList<>(); // Se estiver null, retorna uma lista vazia
+                } else {
+                    return new ArrayList<>(src.getTreatmentHistories()); // Converte PersistentBag em ArrayList
+                }
+            }, GetPatientDTO::setTreatmentHistories);
+        });
 
-    List<GetPatientDTO> patientDTOs = patients.stream()
-            .map(patient -> modelMapper.map(patient, GetPatientDTO.class))
-            .collect(Collectors.toList());
+        List<GetPatientDTO> patientDTOs = patients.stream()
+                .map(patient -> modelMapper.map(patient, GetPatientDTO.class))
+                .collect(Collectors.toList());
 
-    return new PageImpl<>(patientDTOs, pageable, patients.size());
-}
+        return new PageImpl<>(patientDTOs, pageable, patients.size());
+    }
 
-//Não está funcionando - retorna erro de persistentBag, precisa converter para uma arraylist como em cima
+    //Não está funcionando - retorna erro de persistentBag, precisa converter para uma arraylist como em cima
     @Override
     public List<GetPatientDTO> findByFirstName(String firstName, String lastName) {
         logger.info("Finding patient by Full Name {} {}", firstName, lastName);
@@ -94,5 +95,12 @@ public Page<GetPatientDTO> findAll(Pageable pageable) {
         patient.updatePatient(patientDTO);
         repository.save(patient);
         return patientDTO;
+    }
+
+    @Override
+    public void delete(Long id) {
+        logger.info("deleting a patient and all treatments, by id: {}", id);
+        if (!(repository.existsById(id))) {throw new PatientNotFoundException("Patient not found, nothing was deleted");}
+        repository.deleteById(id);
     }
 }

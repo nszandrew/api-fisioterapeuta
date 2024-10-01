@@ -1,7 +1,7 @@
 package br.com.nelmara.physiotherapist.adapters.service;
 
-import br.com.nelmara.physiotherapist.domain.entities.patient.Patient;
-import br.com.nelmara.physiotherapist.domain.entities.patient.dto.GetPatientDTO;
+import br.com.nelmara.physiotherapist.domain.patient.Patient;
+import br.com.nelmara.physiotherapist.domain.patient.dto.GetPatientDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

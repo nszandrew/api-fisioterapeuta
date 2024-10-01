@@ -1,8 +1,8 @@
-package br.com.nelmara.physiotherapist.domain.entities.patient;
+package br.com.nelmara.physiotherapist.domain.patient;
 
-import br.com.nelmara.physiotherapist.domain.entities.patient.dto.UpdatePatientDTO;
-import br.com.nelmara.physiotherapist.domain.entities.user.User;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.history.TreatmentHistory;
+import br.com.nelmara.physiotherapist.domain.patient.dto.UpdatePatientDTO;
+import br.com.nelmara.physiotherapist.domain.user.User;
+import br.com.nelmara.physiotherapist.domain.treatment.history.TreatmentHistory;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;

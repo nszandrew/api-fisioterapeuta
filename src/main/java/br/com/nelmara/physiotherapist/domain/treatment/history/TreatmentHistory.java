@@ -1,10 +1,10 @@
-package br.com.nelmara.physiotherapist.domain.entities.treatment.history;
+package br.com.nelmara.physiotherapist.domain.treatment.history;
 
-import br.com.nelmara.physiotherapist.domain.entities.patient.Patient;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.CorporalTreatment;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.FacialTreatment;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.NeurologicaTreatment;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.ozonio.OzonioTreatment;
+import br.com.nelmara.physiotherapist.domain.patient.Patient;
+import br.com.nelmara.physiotherapist.domain.treatment.types.corporal.CorporalTreatment;
+import br.com.nelmara.physiotherapist.domain.treatment.types.facial.FacialTreatment;
+import br.com.nelmara.physiotherapist.domain.treatment.types.neurologica.NeurologicaTreatment;
+import br.com.nelmara.physiotherapist.domain.treatment.types.ozonio.OzonioTreatment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

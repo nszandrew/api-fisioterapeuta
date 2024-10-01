@@ -1,9 +1,9 @@
-package br.com.nelmara.physiotherapist.domain.entities.treatment.history.dto;
+package br.com.nelmara.physiotherapist.domain.treatment.history.dto;
 
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.dto.GetCorporalTreatmentDTO;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.dto.GetFacialTreatmentDTO;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.dto.GetNeurologicaDTO;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.ozonio.dto.GetOzonioTreatmentDTO;
+import br.com.nelmara.physiotherapist.domain.treatment.types.corporal.dto.GetCorporalTreatmentDTO;
+import br.com.nelmara.physiotherapist.domain.treatment.types.facial.dto.GetFacialTreatmentDTO;
+import br.com.nelmara.physiotherapist.domain.treatment.types.neurologica.dto.GetNeurologicaDTO;
+import br.com.nelmara.physiotherapist.domain.treatment.types.ozonio.dto.GetOzonioTreatmentDTO;
 
 import java.io.Serializable;
 import java.util.Date;

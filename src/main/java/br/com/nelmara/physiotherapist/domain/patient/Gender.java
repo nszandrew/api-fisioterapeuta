@@ -1,4 +1,4 @@
-package br.com.nelmara.physiotherapist.domain.entities.patient;
+package br.com.nelmara.physiotherapist.domain.patient;
 
 public enum Gender {
     MALE("Male"),

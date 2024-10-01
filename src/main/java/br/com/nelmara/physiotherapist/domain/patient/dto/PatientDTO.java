@@ -1,11 +1,10 @@
-package br.com.nelmara.physiotherapist.domain.entities.patient.dto;
+package br.com.nelmara.physiotherapist.domain.patient.dto;
 
-import br.com.nelmara.physiotherapist.domain.entities.patient.Gender;
+import br.com.nelmara.physiotherapist.domain.patient.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 
-import java.io.Serializable;
 import java.util.Date;
 
 

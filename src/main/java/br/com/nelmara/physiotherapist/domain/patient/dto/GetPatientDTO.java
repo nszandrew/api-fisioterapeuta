@@ -1,7 +1,7 @@
-package br.com.nelmara.physiotherapist.domain.entities.patient.dto;
+package br.com.nelmara.physiotherapist.domain.patient.dto;
 
-import br.com.nelmara.physiotherapist.domain.entities.treatment.history.dto.GetTreatmentHistoryDTO;
-import br.com.nelmara.physiotherapist.domain.entities.patient.Gender;
+import br.com.nelmara.physiotherapist.domain.treatment.history.dto.GetTreatmentHistoryDTO;
+import br.com.nelmara.physiotherapist.domain.patient.Gender;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

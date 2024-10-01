@@ -1,6 +1,6 @@
-package br.com.nelmara.physiotherapist.domain.entities.user;
+package br.com.nelmara.physiotherapist.domain.user;
 
-import br.com.nelmara.physiotherapist.domain.entities.patient.Patient;
+import br.com.nelmara.physiotherapist.domain.patient.Patient;
 import jakarta.persistence.*;
 import lombok.*;
 

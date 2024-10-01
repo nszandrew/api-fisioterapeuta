@@ -1,12 +1,11 @@
 package br.com.nelmara.physiotherapist.adapters.controller;
 
 import br.com.nelmara.physiotherapist.adapters.service.PatientService;
-import br.com.nelmara.physiotherapist.domain.entities.patient.dto.GetPatientDTO;
-import br.com.nelmara.physiotherapist.domain.entities.patient.dto.PatientDTO;
-import br.com.nelmara.physiotherapist.domain.entities.patient.dto.UpdatePatientDTO;
+import br.com.nelmara.physiotherapist.domain.patient.dto.GetPatientDTO;
+import br.com.nelmara.physiotherapist.domain.patient.dto.PatientDTO;
+import br.com.nelmara.physiotherapist.domain.patient.dto.UpdatePatientDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -56,5 +55,11 @@ public class PatientController {
     public ResponseEntity<UpdatePatientDTO> updatePatient(@RequestBody @Valid UpdatePatientDTO data, @PathVariable Long id) {
         var newPatient = patientService.updatePatient(data, id);
         return new ResponseEntity<>(newPatient, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletePatient(@PathVariable Long id) {
+        patientService.delete(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

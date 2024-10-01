@@ -1,6 +1,6 @@
 package br.com.nelmara.physiotherapist.adapters.repositories;
 
-import br.com.nelmara.physiotherapist.domain.entities.patient.Patient;
+import br.com.nelmara.physiotherapist.domain.patient.Patient;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

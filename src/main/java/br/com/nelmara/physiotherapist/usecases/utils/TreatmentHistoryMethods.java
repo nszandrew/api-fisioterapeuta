@@ -1,12 +1,12 @@
-package br.com.nelmara.physiotherapist.framework.utils;
+package br.com.nelmara.physiotherapist.usecases.utils;
 
-import br.com.nelmara.physiotherapist.domain.entities.patient.Patient;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.history.TreatmentHistory;
+import br.com.nelmara.physiotherapist.domain.patient.Patient;
+import br.com.nelmara.physiotherapist.domain.treatment.history.TreatmentHistory;
 import br.com.nelmara.physiotherapist.adapters.repositories.TreatmentHistoryRepository;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.corporal.CorporalTreatment;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.facial.FacialTreatment;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.neurologica.NeurologicaTreatment;
-import br.com.nelmara.physiotherapist.domain.entities.treatment.types.ozonio.OzonioTreatment;
+import br.com.nelmara.physiotherapist.domain.treatment.types.corporal.CorporalTreatment;
+import br.com.nelmara.physiotherapist.domain.treatment.types.facial.FacialTreatment;
+import br.com.nelmara.physiotherapist.domain.treatment.types.neurologica.NeurologicaTreatment;
+import br.com.nelmara.physiotherapist.domain.treatment.types.ozonio.OzonioTreatment;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -31,11 +31,11 @@ public class TreatmentHistoryMethods {
 
     public void groupTreatmentToPatientCorporal(Patient patient, CorporalTreatment treatment) {
         TreatmentHistory treatmentHistory = new TreatmentHistory();
-        treatmentHistory.setPatient(patient);
-        treatmentHistory.setCorporal(treatment);
-        treatmentHistory.setTreatmentDate(new Date());
+            treatmentHistory.setPatient(patient);
+            treatmentHistory.setCorporal(treatment);
+            treatmentHistory.setTreatmentDate(new Date());
 
-        repository.save(treatmentHistory);
+            repository.save(treatmentHistory);
     }
 
     public void groupTreatmentToPatientFacial(Patient patient, FacialTreatment treatment) {
