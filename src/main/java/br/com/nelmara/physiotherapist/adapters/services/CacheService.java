@@ -1,4 +1,4 @@
-package br.com.nelmara.physiotherapist.adapters.service;
+package br.com.nelmara.physiotherapist.adapters.services;
 
 public interface CacheService {
 

@@ -1,14 +1,14 @@
-package br.com.nelmara.physiotherapist.usecases;
+package br.com.nelmara.physiotherapist.infra.usecases;
 
 import br.com.nelmara.physiotherapist.adapters.repositories.NeurologicalRepository;
 import br.com.nelmara.physiotherapist.adapters.repositories.PatientRepository;
-import br.com.nelmara.physiotherapist.adapters.service.CacheService;
-import br.com.nelmara.physiotherapist.adapters.service.NeurologicalService;
+import br.com.nelmara.physiotherapist.adapters.services.CacheService;
+import br.com.nelmara.physiotherapist.adapters.services.NeurologicalService;
 import br.com.nelmara.physiotherapist.domain.treatment.types.neurologica.NeurologicaTreatment;
 import br.com.nelmara.physiotherapist.domain.treatment.types.neurologica.dto.NeurologicalDTO;
 import br.com.nelmara.physiotherapist.exceptions.custom.PatientNotFoundException;
 import br.com.nelmara.physiotherapist.exceptions.custom.TreatmentNotFoundException;
-import br.com.nelmara.physiotherapist.usecases.utils.TreatmentHistoryMethods;
+import br.com.nelmara.physiotherapist.infra.utils.TreatmentHistoryMethods;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;

@@ -1,9 +1,10 @@
-package br.com.nelmara.physiotherapist.adapters.controller;
+package br.com.nelmara.physiotherapist.adapters.controllers;
 
-import br.com.nelmara.physiotherapist.adapters.service.OzonioService;
+import br.com.nelmara.physiotherapist.adapters.services.OzonioService;
 import br.com.nelmara.physiotherapist.domain.treatment.types.ozonio.dto.OzonioTreatmentDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class OzonioController {
     @Transactional
     public ResponseEntity<OzonioTreatmentDTO> addOzonio(@RequestBody @Valid OzonioTreatmentDTO data, @PathVariable Long id) {
         service.addOzonioTreatment(data, id);
-        return ResponseEntity.ok().body(data);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

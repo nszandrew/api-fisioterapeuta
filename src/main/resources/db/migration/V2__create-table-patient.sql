@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS tb_patient(
     address VARCHAR(255),
     email VARCHAR(255),
     phone VARCHAR(50),
-    gender ENUM('MALE', 'FEMALE', 'N/A'),  -- Utilizando ENUM diretamente no MySQL
+    gender VARCHAR(20),
     profession VARCHAR(255),
     indication TEXT,
     user_id INT(36),

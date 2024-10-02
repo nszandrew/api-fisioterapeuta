@@ -1,57 +1,56 @@
-package br.com.nelmara.physiotherapist.usecases;
+package br.com.nelmara.physiotherapist.infra.usecases;
 
-import br.com.nelmara.physiotherapist.adapters.repositories.OzonioRepository;
+import br.com.nelmara.physiotherapist.adapters.repositories.FacialRepository;
 import br.com.nelmara.physiotherapist.adapters.repositories.PatientRepository;
-import br.com.nelmara.physiotherapist.adapters.service.CacheService;
-import br.com.nelmara.physiotherapist.adapters.service.OzonioService;
-import br.com.nelmara.physiotherapist.domain.treatment.types.ozonio.OzonioTreatment;
-import br.com.nelmara.physiotherapist.domain.treatment.types.ozonio.dto.OzonioTreatmentDTO;
+import br.com.nelmara.physiotherapist.adapters.services.CacheService;
+import br.com.nelmara.physiotherapist.adapters.services.FacialService;
+import br.com.nelmara.physiotherapist.domain.treatment.types.facial.FacialTreatment;
+import br.com.nelmara.physiotherapist.domain.treatment.types.facial.dto.FacialTreatmentDTO;
 import br.com.nelmara.physiotherapist.exceptions.custom.PatientNotFoundException;
 import br.com.nelmara.physiotherapist.exceptions.custom.TreatmentNotFoundException;
-import br.com.nelmara.physiotherapist.usecases.utils.TreatmentHistoryMethods;
+import br.com.nelmara.physiotherapist.infra.utils.TreatmentHistoryMethods;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OzonioServiceImpl implements OzonioService {
+public class FacialServiceImpl implements FacialService {
 
-
-    private final OzonioRepository repository;
+    private final FacialRepository repository;
     private final PatientRepository patientRepository;
-    private final TreatmentHistoryMethods treatmentHistoryMethods;
     private final CacheService cacheService;
+    private final TreatmentHistoryMethods treatmentHistoryMethods;
     private final Logger logger = LoggerFactory.getLogger(FacialServiceImpl.class);
 
-    public OzonioServiceImpl(OzonioRepository repository, PatientRepository patientRepository, TreatmentHistoryMethods treatmentHistoryMethods, CacheService cacheService) {
+    public FacialServiceImpl(FacialRepository repository, PatientRepository patientRepository, CacheService cacheService, TreatmentHistoryMethods treatmentHistoryMethods) {
         this.repository = repository;
         this.patientRepository = patientRepository;
-        this.treatmentHistoryMethods = treatmentHistoryMethods;
         this.cacheService = cacheService;
+        this.treatmentHistoryMethods = treatmentHistoryMethods;
     }
 
 
     @Override
-    public OzonioTreatmentDTO addOzonioTreatment(OzonioTreatmentDTO data, Long id) {
-        logger.info("Adding Ozonio treatment in a patient");
+    public FacialTreatmentDTO addFacialTreatment(FacialTreatmentDTO data, Long id) {
+        logger.info("Adding facial treatment in a patient");
         var patient = patientRepository.findById(id).orElseThrow(() -> new PatientNotFoundException("Patient not found"));
 
-        OzonioTreatment newTreatment = new OzonioTreatment();
+        FacialTreatment newTreatment = new FacialTreatment();
         BeanUtils.copyProperties(data, newTreatment);
         repository.save(newTreatment);
 
         var treatment = repository.findById(newTreatment.getId()).get();
 
-        treatmentHistoryMethods.groupTreatmentToPatientOzonio(patient, treatment);
+        treatmentHistoryMethods.groupTreatmentToPatientFacial(patient, treatment);
         cacheService.evictAllCacheValues("Patient");
 
         return data;
     }
 
     @Override
-    public OzonioTreatmentDTO updateOzonioTreatment(OzonioTreatmentDTO data, Long id) {
-        logger.info("Updating ozonio treatment in a patient");
+    public FacialTreatmentDTO updateFacialTreatment(FacialTreatmentDTO data, Long id) {
+        logger.info("Updating facial treatment in a patient");
         var treatment = repository.findById(id).orElseThrow(() -> new TreatmentNotFoundException("Treatment not found"));
         treatment.updateTreatment(data);
         repository.save(treatment);

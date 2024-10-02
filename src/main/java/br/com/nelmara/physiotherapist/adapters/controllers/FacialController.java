@@ -1,9 +1,10 @@
-package br.com.nelmara.physiotherapist.adapters.controller;
+package br.com.nelmara.physiotherapist.adapters.controllers;
 
-import br.com.nelmara.physiotherapist.adapters.service.FacialService;
+import br.com.nelmara.physiotherapist.adapters.services.FacialService;
 import br.com.nelmara.physiotherapist.domain.treatment.types.facial.dto.FacialTreatmentDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +19,11 @@ public class FacialController {
         this.service = service;
     }
 
-    @PostMapping("{id}")
+    @PostMapping("/{id}")
     @Transactional
     public ResponseEntity<FacialTreatmentDTO> addFacialTreatment(@RequestBody @Valid FacialTreatmentDTO data, @PathVariable Long id) {
         service.addFacialTreatment(data, id);
-        return ResponseEntity.ok().body(data);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

@@ -1,9 +1,10 @@
-package br.com.nelmara.physiotherapist.adapters.controller;
+package br.com.nelmara.physiotherapist.adapters.controllers;
 
-import br.com.nelmara.physiotherapist.adapters.service.NeurologicalService;
+import br.com.nelmara.physiotherapist.adapters.services.NeurologicalService;
 import br.com.nelmara.physiotherapist.domain.treatment.types.neurologica.dto.NeurologicalDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,8 @@ public class NeurologicalController {
     @PostMapping("/{id}")
     @Transactional
     public ResponseEntity<NeurologicalDTO> addNeurological(@RequestBody @Valid NeurologicalDTO data , @PathVariable Long id) {
-        var sucess = service.addNeurologicalService(data, id);
-        return ResponseEntity.ok().body(sucess);
+        service.addNeurologicalService(data, id);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

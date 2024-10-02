@@ -1,4 +1,4 @@
-package br.com.nelmara.physiotherapist.usecases.utils;
+package br.com.nelmara.physiotherapist.infra.utils;
 
 import br.com.nelmara.physiotherapist.domain.patient.Patient;
 import br.com.nelmara.physiotherapist.domain.treatment.history.TreatmentHistory;

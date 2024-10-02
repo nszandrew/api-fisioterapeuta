@@ -1,6 +1,6 @@
-package br.com.nelmara.physiotherapist.adapters.controller;
+package br.com.nelmara.physiotherapist.adapters.controllers;
 
-import br.com.nelmara.physiotherapist.adapters.service.PatientService;
+import br.com.nelmara.physiotherapist.adapters.services.PatientService;
 import br.com.nelmara.physiotherapist.domain.patient.dto.GetPatientDTO;
 import br.com.nelmara.physiotherapist.domain.patient.dto.PatientDTO;
 import br.com.nelmara.physiotherapist.domain.patient.dto.UpdatePatientDTO;

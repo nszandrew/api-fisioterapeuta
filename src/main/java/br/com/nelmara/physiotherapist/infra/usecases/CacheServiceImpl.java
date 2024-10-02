@@ -1,6 +1,6 @@
-package br.com.nelmara.physiotherapist.usecases;
+package br.com.nelmara.physiotherapist.infra.usecases;
 
-import br.com.nelmara.physiotherapist.adapters.service.CacheService;
+import br.com.nelmara.physiotherapist.adapters.services.CacheService;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 

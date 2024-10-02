@@ -1,16 +1,15 @@
-package br.com.nelmara.physiotherapist.usecases;
+package br.com.nelmara.physiotherapist.infra.usecases;
 
 import br.com.nelmara.physiotherapist.adapters.repositories.PatientRepository;
-import br.com.nelmara.physiotherapist.adapters.service.CacheService;
-import br.com.nelmara.physiotherapist.adapters.service.MapperModel;
-import br.com.nelmara.physiotherapist.adapters.service.PatientService;
+import br.com.nelmara.physiotherapist.adapters.services.CacheService;
+import br.com.nelmara.physiotherapist.adapters.services.MapperModel;
+import br.com.nelmara.physiotherapist.adapters.services.PatientService;
 import br.com.nelmara.physiotherapist.domain.patient.Patient;
 import br.com.nelmara.physiotherapist.domain.patient.dto.GetPatientDTO;
 import br.com.nelmara.physiotherapist.domain.patient.dto.PatientDTO;
 import br.com.nelmara.physiotherapist.domain.patient.dto.UpdatePatientDTO;
 import br.com.nelmara.physiotherapist.domain.treatment.history.dto.GetTreatmentHistoryDTO;
 import br.com.nelmara.physiotherapist.exceptions.custom.PatientNotFoundException;
-import br.com.nelmara.physiotherapist.exceptions.custom.TreatmentNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.slf4j.Logger;

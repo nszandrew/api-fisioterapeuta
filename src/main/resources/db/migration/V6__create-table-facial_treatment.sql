@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS tb_facial_treatment (
     outro_tratamento_estetico VARCHAR(255), -- Se outro... Qual?
     uso_dermocosmeticos VARCHAR(255), -- Faz uso de dermocosméticos ou medicamento dermatológicos, e filtro solar diariamente? Quais?
     ultima_limpeza_pele DATE, -- Quando foi a sua última limpeza de pele?
-    fototipo ENUM('I', 'II', 'III', 'IV', 'V', 'VI'), -- Fototipo: I ( )  II (  )   III (  )  IV (  )   V (  )   VI (  )
-    tipo_pele ENUM('Seca', 'Normal', 'Mista', 'Oleosa'), -- Tipo de Pele : Seca (  )   Normal (  )   Mista (  )   Oleosa (  )
+    fototipo VARCHAR(10), -- Fototipo: I ( )  II (  )   III (  )  IV (  )   V (  )   VI (  )
+    tipo_pele VARCHAR(10), -- Tipo de Pele : Seca (  )   Normal (  )   Mista (  )   Oleosa (  )
     cravos BOOLEAN, -- Cravos (  )
     acne BOOLEAN, -- Acne (  )
     million BOOLEAN, -- Million (  )
