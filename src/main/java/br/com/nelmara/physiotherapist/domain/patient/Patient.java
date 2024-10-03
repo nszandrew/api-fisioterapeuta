@@ -1,5 +1,6 @@
 package br.com.nelmara.physiotherapist.domain.patient;
 
+import br.com.nelmara.physiotherapist.domain.patient.contract.Contract;
 import br.com.nelmara.physiotherapist.domain.patient.dto.UpdatePatientDTO;
 import br.com.nelmara.physiotherapist.domain.user.User;
 import br.com.nelmara.physiotherapist.domain.treatment.history.TreatmentHistory;
@@ -56,6 +57,9 @@ public class Patient implements Serializable {
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<TreatmentHistory> treatmentHistories;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Contract> contracts;
 
     public void updatePatient(UpdatePatientDTO data) {
         if(data.firstName() != null){this.firstName = data.firstName();}
