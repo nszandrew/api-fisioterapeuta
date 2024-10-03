@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                        //REMOVER PARA PRODUCAO
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                         .anyRequest()
                         .authenticated())

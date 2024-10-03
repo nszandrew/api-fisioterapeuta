@@ -1,6 +1,7 @@
 package br.com.nelmara.physiotherapist.infra.usecases;
 
 import br.com.nelmara.physiotherapist.adapters.repositories.PatientRepository;
+import br.com.nelmara.physiotherapist.adapters.repositories.UserRepository;
 import br.com.nelmara.physiotherapist.adapters.services.CacheService;
 import br.com.nelmara.physiotherapist.adapters.services.MapperModel;
 import br.com.nelmara.physiotherapist.adapters.services.PatientService;
@@ -9,7 +10,11 @@ import br.com.nelmara.physiotherapist.domain.patient.dto.GetPatientDTO;
 import br.com.nelmara.physiotherapist.domain.patient.dto.PatientDTO;
 import br.com.nelmara.physiotherapist.domain.patient.dto.UpdatePatientDTO;
 import br.com.nelmara.physiotherapist.domain.treatment.history.dto.GetTreatmentHistoryDTO;
+import br.com.nelmara.physiotherapist.domain.user.User;
+import br.com.nelmara.physiotherapist.domain.user.dto.LoginResponseDTO;
 import br.com.nelmara.physiotherapist.exceptions.custom.PatientNotFoundException;
+import br.com.nelmara.physiotherapist.infra.security.AuthorizationService;
+import br.com.nelmara.physiotherapist.infra.security.TokenService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.slf4j.Logger;
@@ -19,6 +24,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,17 +36,28 @@ public class PatientServiceImpl implements PatientService {
 
     private final PatientRepository repository;
     private final CacheService cacheService;
+    private final TokenService tokenService;
+    private final UserRepository userRepository;
     private final Logger logger = LoggerFactory.getLogger(PatientServiceImpl.class);
 
-    public PatientServiceImpl(PatientRepository repository, CacheService cacheService) {
+    public PatientServiceImpl(PatientRepository repository, CacheService cacheService, TokenService tokenService, UserRepository userRepository) {
         this.repository = repository;
         this.cacheService = cacheService;
+        this.tokenService = tokenService;
+        this.userRepository = userRepository;
     }
 
     @Override
     public void addPatient(PatientDTO data) {
         logger.info("Adding patient {} {}", data.firstName(), data.lastName());
+
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        var jwtToken = (String) authentication.getCredentials();
+        String userName = tokenService.validateToken(jwtToken);
+        User user = (User) userRepository.findByLogin(userName);
+
         Patient patient = new Patient();
+        patient.setUser(user);
         BeanUtils.copyProperties(data, patient);
         repository.save(patient);
         cacheService.evictAllCacheValues("Patient");

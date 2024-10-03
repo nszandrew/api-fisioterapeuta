@@ -24,6 +24,8 @@ public class User implements UserDetails {
     private Long id;
     private String login;
     private String password;
+
+    @Enumerated(EnumType.STRING)
     private UserType type;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
