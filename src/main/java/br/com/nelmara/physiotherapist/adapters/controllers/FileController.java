@@ -5,7 +5,6 @@ import br.com.nelmara.physiotherapist.infra.usecases.FileStorageService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,14 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 @RestController
 @RequestMapping("/api/file")
@@ -58,48 +52,26 @@ public class FileController {
                 .collect(Collectors.toList());
     }
 
-//    @GetMapping("/downloadFile/{fileName:.+}")
-//    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request){
-//        Resource resource = service.loadFileAsResource(fileName);
-//
-//        String contentType = null;
-//
-//        try {
-//            logger.info("Downloading file: " + resource.getFilename());
-//            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-//
-//        }catch (Exception e){
-//            logger.error("Could not determine file type!");
-//        }
-//        if (contentType == null) {
-//            contentType = "application/octet-stream";
-//        }
-//
-//        return ResponseEntity.ok()
-//                .contentType(MediaType
-//                        .parseMediaType(contentType))
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-//                .body(resource);
-//    }
-@GetMapping("/downloadFile/{id}")
-public ResponseEntity<Resource> downloadFile(@PathVariable Long id, HttpServletRequest request){
-    var resource = service.loadFileAsResource(id);
 
-    String contentType = null;
+    @GetMapping("/downloadFile/{id}")
+        public ResponseEntity<Resource> downloadFile(@PathVariable Long id, HttpServletRequest request){
+            var resource = service.loadFileAsResource(id);
 
-    try {
-        contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-    } catch (Exception e) {
-        logger.error("Could not determine file type for " + resource.getFilename(), e);
+            String contentType = null;
+
+            try {
+                contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+            } catch (Exception e) {
+                logger.error("Could not determine file type for " + resource.getFilename(), e);
+            }
+
+            if (contentType == null) {
+                contentType = "application/octet-stream";
+            }
+
+            return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
     }
-
-    if (contentType == null) {
-        contentType = "application/octet-stream";
-    }
-
-    return ResponseEntity.ok()
-            .contentType(MediaType.parseMediaType(contentType))
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-            .body(resource);
-}
 }
